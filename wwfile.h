@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿/*wwfile.h*/
+#pragma once
 #include "stdafx.h"
 /*Абстрактный класс для работы с файлами -- work with the file*/
 class wwfile {

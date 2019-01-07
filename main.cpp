@@ -1,67 +1,60 @@
-﻿#include "kernel.h"
+﻿/*main.cpp*/
+#include <sstream>
+#include "kernel.h"
 #include "file.h"
 #include "ElGamal.h"
 
 /*Демонстрация работы и общение с пользователем через консоль*/
-	void Encryption();
-	void Decryption();
-
-	int main() {
-		setlocale(LC_ALL, "RUSSIAN");
-		int g;
-		cout << "Выберите режим работы 1 -- шифрование, 0 -- расшифрование" << endl;
-		cin >> g;
-		switch (g)
-		{
-		case 1: Encryption(); break;
-		case 0: Decryption(); break;
-		default:
-			cout << "Такого режима не существует";
-			break;
-		}
+void Encryption(string);
+int main(int arg, char *Argsval[]) {
+	setlocale(LC_ALL, "RUSSIAN");
+	if (arg == 3) {
+		stringstream Com(Argsval[1]), Fname(Argsval[2]);
+		string Comman, FileAdress;
+		Com >> Comman; Fname >> FileAdress;
+		if (Comman == "Encryption")  Encryption(FileAdress);
+		else cout << "Command undefined";
 	}
+	else {
+		if (arg == 6) {
+			vector<string> Val(arg);
+			for (size_t i = 1; i < arg; i++) {
+				stringstream S(Argsval[i]);
+				S >> Val[i];
+			}
+			if (Val[1] == "Decryption") {
+				ElGamal Z(Val[2]);
+				Z.Decryption(Val[2], Val[3], Val[4], Val[5]);
+				}
+			else cout << "Command undefined";
+		}
+	}	
+}
 
-	void Encryption() {
-		int g; string FileAdr;
-		cout << "Чтобы ввести адрес файла с открытым текстом нажмите 1. Чтобы использовать адрес по-умолчанию нажмите 0";
-		cin >> g;
-		if (g) {
-			cout << "Введит адрес файла с открытым текстом: " << endl;
-			cin >> FileAdr; cout << endl;
-			ElGamal M(FileAdr);
-			M.Encryption();
-			cout << "Файл был зашифрован." << endl
-				<< "В каталоге нахождения исходного файла созданы файлы:" << endl
-				<< "CryptoTextA.txt и CryptoTextB.txt -- зашифрованное сообщение" << endl
-				<< "PublicKey.txt и PrivateKey.txt -- открытый и закртый ключ соответственно" << endl;
-		}
-		else {
-			ElGamal S;
-			cout << "В каталоге программы была создана папка Crypt." << endl
-				<< "Найдите в ней файл OpenText.txt и запишите туда ваше сообщение" << endl;
-			system("pause");
-			cin.get();
-			S.Encryption();
-			cout << "Файл был зашифрован." << endl
-				<< "В каталоге Crypt созданы файлы:" << endl
-				<< "CryptoTextA.txt и CryptoTextB.txt -- зашифрованное сообщение" << endl
-				<< "PublicKey.txt и PrivateKey.txt -- открытый и закртый ключ соответственно" << endl;
-			system("pause");
-		}
-	}
-	void Decryption() {
-		string A, B, Pub, Pr;
-		cout << "Введите адрес файла CryptoTextA.txt" << endl;
-		cin >> A; A = file::ExCheck(A);
-		cout << "Введите адрес файла CryptoTextB.txt" << endl;
-		cin >> B; B = file::ExCheck(B);
-		cout << "Введите адрес файла PublicKey.txt" << endl;
-		cin >> Pub; Pub = file::ExCheck(Pub);
-		cout << "Введите адрес файла PrivateKey.txt" << endl;
-		cin >> Pr; Pr = file::ExCheck(Pr);
-		ElGamal P; P.Decryption(A, B, Pub, Pr);
-		cout << "Адрес расшифровки: Crypt/Decr.txt";
+void Encryption(string FileAdress) {
+	if (FileAdress == "bydefault"){
+		ElGamal S;
+		cout << "В каталоге программы была создана папка Crypt." << endl
+			<< "Найдите в ней файл OpenText.txt и запишите туда ваше сообщение" << endl;
 		system("pause");
+		cin.get();
+		S.Encryption();
+		cout << "Файл был зашифрован." << endl
+			<< "В каталоге Crypt созданы файлы:" << endl
+			<< "CryptoTextA.txt и CryptoTextB.txt -- зашифрованное сообщение" << endl
+			<< "PublicKey.txt и PrivateKey.txt -- открытый и закртый ключ соответственно" << endl;
+		system("pause");	
 	}
+	else {
+		ElGamal M(FileAdress);
+		M.Encryption();
+		cout << "Файл был зашифрован." << endl
+			<< "В каталоге нахождения исходного файла созданы файлы:" << endl
+			<< "CryptoTextA.txt и CryptoTextB.txt -- зашифрованное сообщение" << endl
+			<< "PublicKey.txt и PrivateKey.txt -- открытый и закртый ключ соответственно" << endl;
+	}
+}
+	
+		
 
 	

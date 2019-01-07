@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿/*kernel.h*/
+#pragma once
 #include "stdafx.h"
 typedef unsigned long long ull;
 namespace ElGam {
@@ -22,7 +23,6 @@ namespace ElGam {
 	public:
 		kernel();
 		kernel(size_t M);
-		~kernel();
 
 		ull GetA() const;
 		ull GetB() const;

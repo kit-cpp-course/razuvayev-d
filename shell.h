@@ -1,4 +1,5 @@
 ﻿#pragma once
+/*shell.h*/
 #include "stdafx.h"
 #include "kernel.h"
 
@@ -28,7 +29,6 @@ namespace ElGam{
 		* param PlainText -- сообщение, которое необходимо зашифровать
 		*/
 		shell(const string PlainText);
-		~shell();
 
 		/* Шифровщик
 		* Осуществляет побуквенное шифрование при помощи класса kernel

@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿/*ElGamal.h*/
+#pragma once
 #include "stdafx.h"
 #include "file.h"
 #include "shell.h"
@@ -23,6 +24,11 @@ public:
 	* и сохраняет все рабочие файлы туда
 	*/
 	ElGamal(string FileAdress);
+	/*Конструктор по введенному массиву адресов
+	* Определяет адрес директории первого переданного файла
+	* и сохраняет все рабочие файлы туда
+	*/
+	ElGamal(vector<string>);
 
 	 /*Шифрование*/
 	void Encryption();

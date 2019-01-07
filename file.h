@@ -1,4 +1,5 @@
-﻿#pragma once
+﻿/*file.h*/
+#pragma once
 #include "stdafx.h"
 #include "wwfile.h"
 

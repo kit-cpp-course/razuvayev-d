@@ -1,3 +1,4 @@
+/*stdafx.h*/
 #pragma once
 #include <string>
 #include <ctime>
